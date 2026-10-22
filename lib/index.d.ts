@@ -1,5 +1,5 @@
 /**
- * Session-title provider that asks the model for the semantic parts of a
+ * Session-title provider that asks the model for the meaningful parts of a
  * title (an optional `type` and a plain-language `summary`) and assembles them
  * with the segments, separator and date format the user configured.
  *
@@ -9,6 +9,6 @@
 import type { Context } from "@deepseek-ai/cordis";
 import { type Config } from "./format.ts";
 export type { Config } from "./format.ts";
-export declare const name = "session-title-semantic";
+export declare const name = "session-title-layout";
 export declare const inject: string[];
 export declare function apply(ctx: Context, rawConfig?: Config): void;

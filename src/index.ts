@@ -1,5 +1,5 @@
 /**
- * Session-title provider that asks the model for the semantic parts of a
+ * Session-title provider that asks the model for the meaningful parts of a
  * title (an optional `type` and a plain-language `summary`) and assembles them
  * with the segments, separator and date format the user configured.
  *
@@ -26,7 +26,7 @@ import {
 
 export type { Config } from "./format.ts";
 
-export const name = "session-title-semantic";
+export const name = "session-title-layout";
 
 export const inject = ["sessionTitle", "llm"];
 

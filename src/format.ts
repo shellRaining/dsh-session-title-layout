@@ -84,7 +84,7 @@ export interface ResolvedConfig {
 function positiveInt(value: number | undefined, fallback: number, label: string): number {
   const resolved = value ?? fallback;
   if (!Number.isSafeInteger(resolved) || resolved < 1) {
-    throw new Error(`session-title-semantic: ${label} must be a positive safe integer`);
+    throw new Error(`session-title-layout: ${label} must be a positive safe integer`);
   }
   return resolved;
 }
@@ -94,41 +94,41 @@ export function resolveConfig(config: Config = {}): ResolvedConfig {
   const presetName = config.preset ?? "conventional";
   const preset = Object.hasOwn(PRESETS, presetName) ? PRESETS[presetName] : undefined;
   if (preset === undefined) {
-    throw new Error(`session-title-semantic: unknown preset "${String(presetName)}"`);
+    throw new Error(`session-title-layout: unknown preset "${String(presetName)}"`);
   }
 
   const segments: readonly Segment[] = config.segments ?? preset.segments;
   if (segments.length === 0 || new Set(segments).size !== segments.length) {
-    throw new Error("session-title-semantic: segments must be non-empty and unique");
+    throw new Error("session-title-layout: segments must be non-empty and unique");
   }
   for (const segment of segments) {
     if (!SEGMENTS.includes(segment)) {
-      throw new Error(`session-title-semantic: unknown segment "${String(segment)}"`);
+      throw new Error(`session-title-layout: unknown segment "${String(segment)}"`);
     }
   }
   if (!segments.includes("summary")) {
-    throw new Error('session-title-semantic: segments must include "summary"');
+    throw new Error('session-title-layout: segments must include "summary"');
   }
 
   const types = (config.types ?? DEFAULT_TYPES).map((type) => type.trim().toLowerCase());
   if (segments.includes("type") && (types.length === 0 || types.some((type) => type === ""))) {
-    throw new Error("session-title-semantic: types must contain non-empty strings");
+    throw new Error("session-title-layout: types must contain non-empty strings");
   }
 
   const automatic = config.automatic ?? "first-prompt";
   if (automatic !== "first-prompt" && automatic !== "all-prompts") {
-    throw new Error('session-title-semantic: automatic must be "first-prompt" or "all-prompts"');
+    throw new Error('session-title-layout: automatic must be "first-prompt" or "all-prompts"');
   }
   const summaryLanguage = config.summaryLanguage?.trim();
   if (config.summaryLanguage !== undefined && summaryLanguage === "") {
-    throw new Error("session-title-semantic: summaryLanguage must not be empty");
+    throw new Error("session-title-layout: summaryLanguage must not be empty");
   }
   const dateSource = config.dateSource ?? "session-created";
   if (dateSource !== "session-created" && dateSource !== "now") {
-    throw new Error('session-title-semantic: dateSource must be "session-created" or "now"');
+    throw new Error('session-title-layout: dateSource must be "session-created" or "now"');
   }
   if ((config.provider === undefined) !== (config.model === undefined)) {
-    throw new Error("session-title-semantic: provider and model must be set together");
+    throw new Error("session-title-layout: provider and model must be set together");
   }
 
   return {
@@ -196,16 +196,16 @@ export function parseModelOutput(raw: string, config: ResolvedConfig): ModelPart
   const start = raw.indexOf("{");
   const end = raw.lastIndexOf("}");
   if (start === -1 || end <= start) {
-    throw new Error("session-title-semantic: model reply contains no JSON object");
+    throw new Error("session-title-layout: model reply contains no JSON object");
   }
   let value: unknown;
   try {
     value = JSON.parse(raw.slice(start, end + 1));
   } catch {
-    throw new Error("session-title-semantic: model reply is not valid JSON");
+    throw new Error("session-title-layout: model reply is not valid JSON");
   }
   if (value === null || typeof value !== "object" || Array.isArray(value)) {
-    throw new Error("session-title-semantic: model reply is not a JSON object");
+    throw new Error("session-title-layout: model reply is not a JSON object");
   }
   const record = value as Record<string, unknown>;
 
@@ -214,14 +214,14 @@ export function parseModelOutput(raw: string, config: ResolvedConfig): ModelPart
       ? cleanSummary(record["summary"], config.summaryMaxLength)
       : "";
   if (summary === "") {
-    throw new Error("session-title-semantic: model reply has no summary");
+    throw new Error("session-title-layout: model reply has no summary");
   }
 
   let type: string | undefined;
   if (config.segments.includes("type")) {
     const candidate = typeof record["type"] === "string" ? record["type"].trim().toLowerCase() : "";
     if (!config.types.includes(candidate)) {
-      throw new Error(`session-title-semantic: model reply type "${candidate}" is not allowed`);
+      throw new Error(`session-title-layout: model reply type "${candidate}" is not allowed`);
     }
     type = candidate;
   }

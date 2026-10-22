@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Semantic session titles",
+    "title": "Session title layout",
     "description": "Names sessions with a configurable layout such as \"feat: summary\", in the language you choose."
   }
 }

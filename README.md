@@ -1,4 +1,4 @@
-# dsh-session-title-semantic
+# dsh-session-title-layout
 
 English | [简体中文](README.zh.md)
 
@@ -33,13 +33,13 @@ dsh allows a single asynchronous title provider at a time. This package's bundle
 Through the Plugins page, or by asking an agent to run `plugin_manager` `install_bundle` with:
 
 ```text
-git+https://github.com/shellRaining/dsh-session-title-semantic.git
+git+https://github.com/shellRaining/dsh-session-title-layout.git
 ```
 
 Installing the bundle inserts a row with default configuration (`conventional` layout). To configure it, override the row in your profile's `cordis.patch.yml`:
 
 ```yaml
-- id: session-title-semantic
+- id: session-title-layout
   config:
     preset: type-summary
     separator: ": "

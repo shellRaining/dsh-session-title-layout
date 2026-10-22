@@ -1,4 +1,4 @@
-# dsh-session-title-semantic
+# dsh-session-title-layout
 
 [English](README.md) | 简体中文
 
@@ -33,13 +33,13 @@ dsh 同一时间只允许一个异步标题 provider。本包的 bundle 会禁�
 在 Plugins 页面安装，或让 agent 调用 `plugin_manager` 的 `install_bundle`，目标为：
 
 ```text
-git+https://github.com/shellRaining/dsh-session-title-semantic.git
+git+https://github.com/shellRaining/dsh-session-title-layout.git
 ```
 
 安装 bundle 会插入一行默认配置（`conventional` 版式）。要自定义，在 profile 的 `cordis.patch.yml` 里覆盖这一行：
 
 ```yaml
-- id: session-title-semantic
+- id: session-title-layout
   config:
     preset: type-summary
     separator: "："

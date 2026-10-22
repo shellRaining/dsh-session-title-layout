@@ -4,6 +4,6 @@
   disabled: true
 
 - insert:
-    - id: session-title-semantic
-      name: dsh-session-title-semantic
+    - id: session-title-layout
+      name: dsh-session-title-layout
       config: {}

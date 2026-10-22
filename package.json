@@ -1,7 +1,7 @@
 {
-  "name": "dsh-session-title-semantic",
+  "name": "dsh-session-title-layout",
   "version": "0.2.0",
-  "description": "DeepSeek Harness session-title provider with a configurable layout, separator and summary language.",
+  "description": "DeepSeek Harness session-title provider with a configurable layout (type, date, summary), separator and summary language.",
   "keywords": [
     "deepseek-harness",
     "dsh",
@@ -12,11 +12,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/shellRaining/dsh-session-title-semantic.git"
+    "url": "git+ssh://git@github.com/shellRaining/dsh-session-title-layout.git"
   },
-  "homepage": "https://github.com/shellRaining/dsh-session-title-semantic#readme",
+  "homepage": "https://github.com/shellRaining/dsh-session-title-layout#readme",
   "bugs": {
-    "url": "https://github.com/shellRaining/dsh-session-title-semantic/issues"
+    "url": "https://github.com/shellRaining/dsh-session-title-layout/issues"
   },
   "type": "module",
   "main": "./lib/index.js",
@@ -44,8 +44,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.test.json",
-    "test": "node --test test/*.test.ts",
-    "prepack": "pnpm run typecheck && pnpm run test && pnpm run build"
+    "test": "node --test test/*.test.ts"
   },
   "dsh": {
     "bundle": {
